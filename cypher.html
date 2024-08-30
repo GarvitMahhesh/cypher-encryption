@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <style>
+        body {
+            background-color: rgb(99, 212, 235);
+        }
+        h1, h2 {
+            margin-left: 45px;
+            color: rgb(199, 73, 94);
+            text-decoration: underline;
+        }
+        label {
+            margin-left: 3%;
+            font-size: 30px;
+        }
+        #inputText, #key {
+            margin-left: 50px;
+            box-sizing: border-box;
+            font-size: 25px;
+            border: 2px solid #0b0b0b;
+            border-radius: 4px;
+        }
+        button {
+            font-size: 20px;
+            margin-left: 50px;
+            border: 2px solid #0b0b0b;
+            border-radius: 2px;
+            background-color: palevioletred;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:active {
+            opacity: 0.7;
+        }
+        #result {
+            margin-left: 45px;
+            color: rgb(81, 104, 235);
+            text-decoration: underline;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caesar Cipher</h1>
+    <label for="inputText">Enter Text</label><br>
+    <input type="text" id="inputText" placeholder="Enter your text here"><br><br>
+
+    <label for="key">Enter Key (Number)</label><br>
+    <input type="number" id="key" placeholder="Enter a number"><br><br>
+
+    <button onclick="encrypt()">Encrypt</button>
+
+    <h2>Encrypted Text:</h2>
+    <p id="result"></p>
+
+    <script>
+        function encrypt() {
+            let input = document.querySelector("#inputText").value;
+            let key = parseInt(document.querySelector("#key").value);
+            let cyphertext = "";
+
+            for (let i = 0; i < input.length; i++) {
+                const element = input[i];
+                
+                if (element.match(/[A-Z]/)) {
+                    
+                    let code = ((element.charCodeAt(0) - 65 + key) % 26) + 65;
+                    cyphertext += String.fromCharCode(code);
+                } else if (element.match(/[a-z]/)) {
+                  
+                    let code = ((element.charCodeAt(0) - 97 + key) % 26) + 97;
+                    cyphertext += String.fromCharCode(code);
+                } else {
+                    
+                  
+                    cyphertext += element;
+                }
+            }
+
+            document.querySelector("#result").textContent = cyphertext;
+        }
+    </script>
+</body>
+</html>
